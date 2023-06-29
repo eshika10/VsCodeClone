@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <div id="main">
+     <div id="side">
+         <h4>Vs Code Clone</h4>
+         <div id="line"></div>
+         <div class="fileicons">
+            <h5>Folder Name</h5>
+            <div class="icons">
+              <i id="filecreate" class="ri-file-add-fill"></i>
+              <i id="foldercreate" class="ri-folder-add-fill"></i>
+              <i class="ri-restart-fill"></i>
+            </div>
+         </div>
+         <form class="formcreation" action="fileCreate" id="fileform" method="get">
+            <input name="fileName" placeholder="Enter file name" type="text"/>
+         </form>
+         <form class="formcreation" action="folderCreate" id="folderform">
+          <input name="folderName" placeholder="Enter folder name" type="text"/>
+        </form>
+         <div class="files">
+            <% files.forEach(function(elem){ %>
+                <h5 class="file">
+                  <% if(elem.isDirectory()){ %>
+                    <i class="ri-folder-3-fill"></i>
+
+                   <% }else{ %>
+                    <i class="ri-file-text-line"></i>
+                    <% }%>
+                    <% if(elem.isDirectory()){ %>
+                      <%= elem.name %>
+                    <% }else{ %>
+                       <a href="/file/<%= elem.name %>"><%= elem.name %></a>
+                    <% }%>  
+                </h5>
+
+            <% }) %>
+         </div>
+     </div>
+  <div id="right">
+     <small>Nothing here</small>
+  </div>
+   
+  <script>
+
+       function turnoffboth(){
+
+           var allelems=[...document.querySelectorAll(".formcreation")]
+           allelems.forEach(function(elems){
+               elems.style.display= "none";
+           })
+           
+       }
+
+       var filecreation=document.querySelector("#filecreate");
+       filecreation.addEventListener("click",function(){
+           turnoffboth();
+           document.querySelector("#fileform").style.display ="initial";
+       })
+
+       var foldercreation=document.querySelector("#foldercreate");
+       foldercreation.addEventListener("click",function(){
+           turnoffboth();
+           document.querySelector("#folderform").style.display ="initial";
+       })
+  </script>
+
+  
+</body>
+</html>
